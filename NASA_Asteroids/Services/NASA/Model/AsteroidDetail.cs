@@ -11,5 +11,12 @@
         public double relative_velocity_km_per_hour { get; set; }
         public double miss_distance_km { get; set; }
         public string? orbiting_body { get; set; }
+        //Diametro promedio del asteroide
+        public double estimated_diameter_avg_km {
+            get
+            {
+                return (estimated_diameter_min_km + estimated_diameter_max_km) / 2;
+            }
+        }
     }
 }
