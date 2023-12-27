@@ -5,6 +5,8 @@ VisualStudioVersion = 17.5.33414.496
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NASA_Asteroids", "NASA_Asteroids\NASA_Asteroids.csproj", "{6A80C4B0-0738-4583-927C-9C1BCA77E05B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NASA_Asteroids.Data", "NASA_Asteroids.Data\NASA_Asteroids.Data.csproj", "{29AA2CB8-6231-41E6-8582-A75D005A84AF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{6A80C4B0-0738-4583-927C-9C1BCA77E05B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A80C4B0-0738-4583-927C-9C1BCA77E05B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6A80C4B0-0738-4583-927C-9C1BCA77E05B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29AA2CB8-6231-41E6-8582-A75D005A84AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29AA2CB8-6231-41E6-8582-A75D005A84AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29AA2CB8-6231-41E6-8582-A75D005A84AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29AA2CB8-6231-41E6-8582-A75D005A84AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

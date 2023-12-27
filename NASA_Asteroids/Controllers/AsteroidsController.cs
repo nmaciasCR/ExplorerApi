@@ -24,6 +24,7 @@ namespace NASA_Asteroids.Controllers
                                 int days)
         {
             const int TOP = 3;
+            DateTime dateRequest = DateTime.Now;
             DateTime dateFrom = DateTime.Now.Date;
             DateTime dateTo = dateFrom.AddDays(days).Date;
             Business.DTO.ExplorerResultResponse explorerResult;
@@ -31,16 +32,17 @@ namespace NASA_Asteroids.Controllers
             try
             {
                 //TOP asteroides
-                List<Services.NASA.Model.AsteroidDetail> asteroides = _busimessExplorer.GetTopAzardousAsteroids(TOP, dateFrom, dateTo);
-
+                List<Services.NASA.Model.AsteroidDetail> asteroids = _busimessExplorer.GetTopAzardousAsteroids(TOP, dateFrom, dateTo);
+                //Guardamos la consulta en la DDBB
+                int trackId = _busimessExplorer.Save(dateRequest, dateFrom, dateTo, asteroids);
                 //Creamos el objeto de respuesta
                 explorerResult = new Business.DTO.ExplorerResultResponse();
-                explorerResult.fecha_ejecucion = DateTime.Now;
+                explorerResult.trackId = trackId;
+                explorerResult.fecha_ejecucion = dateRequest.ToString("yyyy-MM-dd HH:mm:ss");
                 explorerResult.fecha_desde = dateFrom.ToString("yyyy-MM-dd");
                 explorerResult.fecha_hasta = dateTo.ToString("yyyy-MM-dd");
                 explorerResult.top = TOP;
-                explorerResult.asteroides = new List<Business.DTO.Asteroids>(asteroides.Select(a => _businessAsteroids.MapToDTO(a)));
-
+                explorerResult.asteroides = new List<Business.DTO.Asteroids>(asteroids.Select(a => _businessAsteroids.MapToDTO(a)));
 
                 return StatusCode(StatusCodes.Status200OK, explorerResult);
 

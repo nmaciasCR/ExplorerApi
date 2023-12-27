@@ -2,7 +2,8 @@
 {
     public class ExplorerResultResponse
     {
-        public DateTime fecha_ejecucion { get; set; }
+        public int trackId { get; set; }
+        public string fecha_ejecucion { get; set; }
         public string fecha_desde { get; set; }
         public string fecha_hasta { get; set; }
         public int top { get; set; }
