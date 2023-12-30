@@ -36,12 +36,9 @@
                 return topAsteroids
                         .Where(a => a.is_potentially_hazardous_asteroid
                                     && a.orbiting_body == "Earth")
-                        .OrderByDescending(ta => ta.estimated_diameter_max_km)
+                        .OrderByDescending(ta => ta.estimated_diameter_avg_km)
                         .Take(top)
                         .ToList();
-
-
-
             } catch
             {
                 //log error

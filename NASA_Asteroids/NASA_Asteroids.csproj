@@ -18,4 +18,8 @@
     <ProjectReference Include="..\NASA_Asteroids.Data\NASA_Asteroids.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Scripts\" />
+  </ItemGroup>
+
 </Project>

@@ -19,14 +19,17 @@ namespace NASA_Asteroids.Controllers
         }
 
         [HttpGet]
-        public ActionResult Get([Required(ErrorMessage = "El parámetro 'days' es obligatorio")]
-                                [Range(1, 7, ErrorMessage = "El parámetro 'days' debe ser un valor entre 1 y 7")]
-                                int days)
+        public ActionResult Get([FromQuery] Business.DTO.ExplorerResultRequest model)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             const int TOP = 3;
             DateTime dateRequest = DateTime.Now;
             DateTime dateFrom = DateTime.Now.Date;
-            DateTime dateTo = dateFrom.AddDays(days).Date;
+            DateTime dateTo = dateFrom.AddDays(model.Days).Date;
             Business.DTO.ExplorerResultResponse explorerResult;
 
             try
