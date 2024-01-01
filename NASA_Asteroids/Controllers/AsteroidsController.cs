@@ -19,7 +19,7 @@ namespace NASA_Asteroids.Controllers
         }
 
         [HttpGet]
-        public ActionResult Get([FromQuery] Business.DTO.ExplorerResultRequest model)
+        public async Task<ActionResult> Get([FromQuery] Business.DTO.ExplorerResultRequest model)
         {
             if (!ModelState.IsValid)
             {
@@ -35,7 +35,7 @@ namespace NASA_Asteroids.Controllers
             try
             {
                 //TOP asteroides
-                List<Services.NASA.Model.AsteroidDetail> asteroids = _busimessExplorer.GetTopAzardousAsteroids(TOP, dateFrom, dateTo);
+                List<Services.NASA.Model.AsteroidDetail> asteroids = await _busimessExplorer.GetTopAzardousAsteroids(TOP, dateFrom, dateTo);
                 //Guardamos la consulta en la DDBB
                 int trackId = _busimessExplorer.Save(dateRequest, dateFrom, dateTo, asteroids);
                 //Creamos el objeto de respuesta
@@ -55,9 +55,6 @@ namespace NASA_Asteroids.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
 
             }
-
-
-
         }
     }
 }

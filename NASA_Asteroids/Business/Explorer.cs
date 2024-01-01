@@ -24,27 +24,30 @@
         /// <param name="dateFrom">Fecha de unicio</param>
         /// <param name="dateTo">Fecha Fin</param>
         /// <returns></returns>
-        public List<Services.NASA.Model.AsteroidDetail> GetTopAzardousAsteroids(int top, DateTime dateFrom, DateTime dateTo)
+        public async Task<List<Services.NASA.Model.AsteroidDetail>> GetTopAzardousAsteroids(int top, DateTime dateFrom, DateTime dateTo)
         {
-            List<Services.NASA.Model.AsteroidDetail> topAsteroids;
-
-            try
+            return await Task.Run(() =>
             {
-                //Pedimos los asteroides al servicio de la NASA
-                topAsteroids = _servicesNAZA.DetectObjects(dateFrom, dateTo);
-                //Filtramos segun requerimientos
-                return topAsteroids
-                        .Where(a => a.is_potentially_hazardous_asteroid
-                                    && a.orbiting_body == "Earth")
-                        .OrderByDescending(ta => ta.estimated_diameter_avg_km)
-                        .Take(top)
-                        .ToList();
-            } catch
-            {
-                //log error
-                throw new Exception($"ERROR en el metodo GetTopAzardousAsteroids({top}, {dateFrom.ToString()}, {dateTo.ToString()})"); 
-            }
+                List<Services.NASA.Model.AsteroidDetail> topAsteroids;
 
+                try
+                {
+                    //Pedimos los asteroides al servicio de la NASA
+                    topAsteroids = _servicesNAZA.DetectObjects(dateFrom, dateTo);
+                    //Filtramos segun requerimientos
+                    return topAsteroids
+                            .Where(a => a.is_potentially_hazardous_asteroid
+                                        && a.orbiting_body == "Earth")
+                            .OrderByDescending(ta => ta.estimated_diameter_avg_km)
+                            .Take(top)
+                            .ToList();
+                }
+                catch
+                {
+                    //log error
+                    throw new Exception($"ERROR en el metodo GetTopAzardousAsteroids({top}, {dateFrom.ToString()}, {dateTo.ToString()})");
+                }
+            });
         }
 
         /// <summary>
@@ -82,7 +85,8 @@
                             miss_distance_km = ast.miss_distance_km,
                             orbiting_body = ast.orbiting_body
                         });
-                    } else
+                    }
+                    else
                     {
                         //referenciamos el asteroide existente
                         newExplorer.asteroid.Add(dbAsteroid);
@@ -96,7 +100,8 @@
                 return newExplorer.ID;
 
 
-            } catch
+            }
+            catch
             {
                 //Log error
                 return 0;
